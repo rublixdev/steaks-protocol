@@ -63,11 +63,15 @@ contract MasterChef is Ownable {
     // Dev address.
     address public devaddr;
     // Block number when bonus STEAK period ends.
-    uint256 public bonusEndBlock;
+    uint256 public bonusOneEndBlock;
+    uint256 public bonusTwoEndBlock;
+    uint256 public bonusThreeEndBlock;
     // STEAK tokens created per block.
     uint256 public steakPerBlock;
     // Bonus muliplier for early steak makers.
-    uint256 public constant BONUS_MULTIPLIER = 10;
+    uint256 public constant BONUS_ONE_MULTIPLIER = 2;
+    uint256 public constant BONUS_TWO_MULTIPLIER = 5;
+    uint256 public constant BONUS_THREE_MULTIPLIER = 10;
     // The migrator contract. It has a lot of power. Can only be set through governance (owner).
     IMigratorChef public migrator;
 
@@ -89,13 +93,17 @@ contract MasterChef is Ownable {
         address _devaddr,
         uint256 _steakPerBlock,
         uint256 _startBlock,
-        uint256 _bonusEndBlock
+        uint256 _bonusOneEndBlock
+        uint256 _bonusTwoEndBlock
+        uint256 _bonusThreeEndBlock
     ) public {
         steak = _steak;
         devaddr = _devaddr;
         steakPerBlock = _steakPerBlock;
-        bonusEndBlock = _bonusEndBlock;
         startBlock = _startBlock;
+        bonusOneEndBlock = _bonusOneEndBlock;
+        bonusTwoEndBlock = _bonusTwoEndBlock;
+        bonusThreeEndBlock = _bonusThreeEndBlock;
     }
 
     function poolLength() external view returns (uint256) {
